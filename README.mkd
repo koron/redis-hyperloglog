@@ -30,7 +30,27 @@ Calculate/estimate cardinality on redis server by HyperLogLog algorithm.
     $ redis-cli --eval hll_count.lua set2 set4 , 4
     (integer) 78
 
+`add.sh` script add 4 counters like this:
+
 *   `set1` - includes from "item1" to "item50" step by 1 (50 items).
 *   `set2` - includes from "item51" to "item100" step by 1 (50 items).
 *   `set3` - includes from "item1" to "item99" step by 2 (50 items).
 *   `set4` - includes from "item2" to "item100" step by 2 (50 items).
+
+So expected result of union `set1` and `set2` is 100.  And others are:
+
+*   `set3` and `set4` - 100
+*   `set1` and `set3` - 75
+*   `set1` and `set4` - 75
+*   `set2` and `set3` - 75
+*   `set2` and `set4` - 75
+
+Above results are almost as expected (expect for `set2` and `set3` pair).
+
+On these tests, we use 4 as `bits`, it means size of counter is only 16 (2^4)
+bytes.  To check actual data for counters:
+
+    $ redis-cli GET set1
+    $ redis-cli GET set2
+    $ redis-cli GET set3
+    $ redis-cli GET set4
