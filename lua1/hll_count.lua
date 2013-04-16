@@ -68,7 +68,7 @@ end
 local function raw_union(keys, maxlen)
   local retval = {}
 
-  for i, v = pairs(keys) do
+  for i, v in pairs(keys) do
     local str = redis.call('GET', v)
     local len = math.min(str:len(), maxlen)
     for j = 1, len do
