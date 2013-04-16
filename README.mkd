@@ -1,0 +1,3 @@
+# Redis HyperLogLog
+
+Calculate/estimate cardinality on redis server by HyperLogLog algorithm.
