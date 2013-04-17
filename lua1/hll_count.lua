@@ -101,7 +101,7 @@ local function estimate_count(m, len, estimate)
   elseif estimate <= math.pow(2, 32) / 30.0 then
     return round(estimate)
   else
-    return round(math.pow(-2, 32) * math.log(1 - estimate / math.pow(2, 32)))
+    return round(-math.pow(2, 32) * math.log(1 - estimate / math.pow(2, 32)))
   end
 end
 
