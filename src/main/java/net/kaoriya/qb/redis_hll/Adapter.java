@@ -11,7 +11,7 @@ public class Adapter
     public final static String SHA1_ADD =
         "112f79660bd9acbc4064cdb8b7d69d5913fe2cf3";
     public final static String SHA1_COUNT =
-        "906d0e3cd024c7031e79c5273d3b3501a4c4db19";
+        "c69a161cc39eb38a6483b9fab82f00565b482064";
 
     private int defaultBits;
     private Charset charset;
