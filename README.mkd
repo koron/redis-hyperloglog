@@ -45,6 +45,23 @@ System.out.println(adapter.count("set2", "set3"));
 System.out.println(adapter.count("set2", "set4"));
 ```
 
+It will show:
+
+```
+47
+64
+46
+33
+108
+108
+71
+70
+106
+78
+```
+
+This is equal to below lua1/ sample.
+
 ### Contribute
 
 *   [MurmurHash3](https://github.com/yonik/java_util/blob/master/src/util/hash/MurmurHash3.java)
