@@ -2,6 +2,23 @@
 
 Calculate/estimate cardinality on redis server by HyperLogLog algorithm.
 
+## Usage of Java version
+
+### Preparation
+
+    $ cat src/main/lua/hll_add.lua | redis-cli -x script load
+    $ cat src/main/lua/hll_count.lua | redis-cli -x script load
+    $ gradle build
+
+### Samples
+
+TODO: write me.
+
+### Contribute
+
+*   [MurmurHash3](https://github.com/yonik/java_util/blob/master/src/util/hash/MurmurHash3.java)
+
+
 ## Usage of lua1/ sample
 
     $ cd lua1
@@ -54,17 +71,3 @@ bytes.  To check actual data for counters:
     $ redis-cli GET set2
     $ redis-cli GET set3
     $ redis-cli GET set4
-
-## Usage of Java version
-
-### Preparation
-
-    $ cat src/main/lua/hll_add.lua | redis-cli
-    $ cat src/main/lua/hll_count.lua | redis-cli
-    $ gradle build
-
-### Samples
-
-### Contribute
-
-*   [MurmurHash3](https://github.com/yonik/java_util/blob/master/src/util/hash/MurmurHash3.java)
