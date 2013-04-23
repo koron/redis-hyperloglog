@@ -1,0 +1,24 @@
+// vim:set ts=8 sts=4 sw=4 tw=0 et ft=groovy:
+
+apply plugin: 'java'
+
+//sourceCompatibility = 1.6
+version = '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'redis.clients', name: 'jedis', version: '2.+'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+task(runMain, dependsOn: 'classes', type: JavaExec) {
+    main = 'net.kaoriya.qb.redis_hll.Main'
+    classpath = sourceSets.main.runtimeClasspath
+    //args 'foo'
+    //systemProperty 'bar', 'baz'
+}
+
+defaultTasks 'runMain'
