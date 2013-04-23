@@ -9,7 +9,7 @@ public class Adapter
 {
     public final static int DEFAULT_BITS = 9;
     public final static String SHA1_ADD =
-        "112f79660bd9acbc4064cdb8b7d69d5913fe2cf3";
+        "2eb7a83ccc6847dec2eeaaa46203b1564a9ae73e";
     public final static String SHA1_COUNT =
         "c69a161cc39eb38a6483b9fab82f00565b482064";
 

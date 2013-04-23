@@ -7,12 +7,43 @@ Calculate/estimate cardinality on redis server by HyperLogLog algorithm.
 ### Preparation
 
     $ cat src/main/lua/hll_add.lua | redis-cli -x script load
+    "2eb7a83ccc6847dec2eeaaa46203b1564a9ae73e"
     $ cat src/main/lua/hll_count.lua | redis-cli -x script load
+    "c69a161cc39eb38a6483b9fab82f00565b482064"
     $ gradle build
 
 ### Samples
 
-TODO: write me.
+```java
+// jedis is an instance of redis.clients.jedis.Jedis.
+
+Adapter adapter = new Adapter(jedis, 4);
+
+// Setup 4 counters: set1, set2, set3, set4
+for (int i = 1; i <= 50; ++i) {
+  adapter.add("set1", "item" + i);
+}
+for (int i = 51; i <= 100; ++i) {
+  adapter.add("set2", "item" + i);
+}
+for (int i = 1; i <= 100; i += 2) {
+  adapter.add("set3", "item" + i);
+}
+for (int i = 2; i <= 100; i += 2) {
+  adapter.add("set4", "item" + i);
+}
+
+System.out.println(adapter.count("set1"));
+System.out.println(adapter.count("set2"));
+System.out.println(adapter.count("set3"));
+System.out.println(adapter.count("set4"));
+System.out.println(adapter.count("set1", "set2"));
+System.out.println(adapter.count("set3", "set4"));
+System.out.println(adapter.count("set1", "set3"));
+System.out.println(adapter.count("set1", "set4"));
+System.out.println(adapter.count("set2", "set3"));
+System.out.println(adapter.count("set2", "set4"));
+```
 
 ### Contribute
 

@@ -17,7 +17,7 @@ dependencies {
 task(runMain, dependsOn: 'classes', type: JavaExec) {
     main = 'net.kaoriya.qb.redis_hll.Main'
     classpath = sourceSets.main.runtimeClasspath
-    //args 'foo'
+    //args 'avalon'
     //systemProperty 'bar', 'baz'
 }
 

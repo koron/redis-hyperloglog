@@ -30,7 +30,8 @@ local function hll_add(key, bits, hash_value)
   if current == nil or value > current then
     redis.call('SETRANGE', key, index, string.char(value))
   end
-  return { index, value }
+  --return { index, value }
+  return index
 end
 
 return hll_add(KEYS[1], tonumber(ARGV[1]), tonumber(ARGV[2]))
