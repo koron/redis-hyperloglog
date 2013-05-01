@@ -71,8 +71,8 @@ This is equal to below lua1/ sample.
 ### Redisクライアント側での準備
 
 1.  以下のファイルを自分のプロジェクトにコピーします
-    *   src/main/java/net/kaoriya/qb/redis_hll/Adapter.java
-    *   src/main/java/net/kaoriya/qb/redis_hll/MurmurHash3.java
+    *   `src/main/java/net/kaoriya/qb/redis_hll/Adapter.java`
+    *   `src/main/java/net/kaoriya/qb/redis_hll/MurmurHash3.java`
 
 2.  Jedis オブジェクトを取得し Adapter を作成します。
 
@@ -116,15 +116,15 @@ This is equal to below lua1/ sample.
 ### Redisサーバ側での準備
 
 1.  以下のファイルをRedisサーバにアクセスできる場所へコピーします
-    *   src/main/lua/hll_add.lua
-    *   src/main/lua/hll_count.lua
+    *   `src/main/lua/hll_add.lua`
+    *   `src/main/lua/hll_count.lua`
 
 2.  両スクリプトをサーバに読み込ませます。
 
+    ```
     $ cat hll_add.lua | redis-cli -x script load
-    "2eb7a83ccc6847dec2eeaaa46203b1564a9ae73e"
     $ cat hll_count.lua | redis-cli -x script load
-    "c69a161cc39eb38a6483b9fab82f00565b482064"
+    ```
 
 3.  クライアントプログラムからアクセスします。
 
