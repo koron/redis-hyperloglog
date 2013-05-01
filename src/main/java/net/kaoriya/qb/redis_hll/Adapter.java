@@ -8,8 +8,20 @@ import redis.clients.jedis.Jedis;
 public class Adapter
 {
     public final static int DEFAULT_BITS = 9;
+
+    /**
+     * SHA1 hash of src/main/lua/hll_add.lua script.
+     * 
+     * When you update the script, update this hash too.
+     */
     public final static String SHA1_ADD =
         "2eb7a83ccc6847dec2eeaaa46203b1564a9ae73e";
+
+    /**
+     * SHA1 hash of src/main/lua/hll_count.lua script.
+     * 
+     * When you update the script, update this hash too.
+     */
     public final static String SHA1_COUNT =
         "c69a161cc39eb38a6483b9fab82f00565b482064";
 

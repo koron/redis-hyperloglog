@@ -2,7 +2,7 @@
 
 Calculate/estimate cardinality on redis server by HyperLogLog algorithm.
 
-## Usage of Java version
+## Usage of Java (sample) version
 
 ### Preparation
 
@@ -66,6 +66,75 @@ This is equal to below lua1/ sample.
 
 *   [MurmurHash3](https://github.com/yonik/java_util/blob/master/src/util/hash/MurmurHash3.java)
 
+## Practical usage of Java version.
+
+### Redisクライアント側での準備
+
+1.  以下のファイルを自分のプロジェクトにコピーします
+
+    *   src/main/java/net/kaoriya/qb/redis_hll/Adapter.java
+    *   src/main/java/net/kaoriya/qb/redis_hll/MurmurHash3.java
+
+2.  Jedis オブジェクトを取得し Adapter を作成します。
+
+    ```java
+    import net.kaoriya.qb.redis_hll.Adapter;
+    import redis.clients.jedis.Jedis;
+    import redis.clients.jedis.JedisPool;
+    import redis.clients.jedis.JedisPoolConfig;
+
+    JedisPool pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
+    Jedis jedis = pool.getResource();
+
+    Adapter adapter = new Adapter(jedis);
+    // もしくは以下のようにカウンターのサイズ(2^n)を指定してください。
+    // 省略された場合は Adapter.DEFAULT_BITS = 9 を使用します。
+    // Adapter adapter = new Adapter(jedis, 4);
+    ```
+
+3.  Adapter#add でカウンターを更新します。
+
+    ```java
+    adapter.add("{カウンター名1}", "カーディナリティの対象文字列");
+    ```
+
+    add メソッドにはいくつかのバリエーションがあります。
+
+    *   `add(String, byte[])` - 文字列の代わりにバイト配列を使用
+    *   `add(String, long)` - 自分でハッシュ値を計算する場合
+
+4.  Adapter#count でカウントを取得します。
+
+    ```java
+    long n = adapter.count("{カウンター名1}");
+    ```
+
+    複数のカウンターを指定すると合成したカウント(ユニオン)を取得できます。
+
+    ```java
+    long n2 = adapter.count("{カウンター名1}", "{カウンター名2}");
+    ```
+
+### Redisサーバ側での準備
+
+1.  以下のファイルをRedisサーバにアクセスできる場所へコピーします
+
+    *   src/main/lua/hll_add.lua
+    *   src/main/lua/hll_count.lua
+
+2.  両スクリプトをサーバに読み込ませます。
+
+    $ cat hll_add.lua | redis-cli -x script load
+    "2eb7a83ccc6847dec2eeaaa46203b1564a9ae73e"
+    $ cat hll_count.lua | redis-cli -x script load
+    "c69a161cc39eb38a6483b9fab82f00565b482064"
+
+3.  クライアントプログラムからアクセスします。
+
+### 注意事項
+
+`hll_add.lua`, `hll_count.lua` を更新した場合は `Adapter#SHA1_ADD` と
+`Adapter#SHA1_COUNT` を更新してください。
 
 ## Usage of lua1/ sample
 
