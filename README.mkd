@@ -71,7 +71,6 @@ This is equal to below lua1/ sample.
 ### Redisクライアント側での準備
 
 1.  以下のファイルを自分のプロジェクトにコピーします
-
     *   src/main/java/net/kaoriya/qb/redis_hll/Adapter.java
     *   src/main/java/net/kaoriya/qb/redis_hll/MurmurHash3.java
 
@@ -99,7 +98,6 @@ This is equal to below lua1/ sample.
     ```
 
     add メソッドにはいくつかのバリエーションがあります。
-
     *   `add(String, byte[])` - 文字列の代わりにバイト配列を使用
     *   `add(String, long)` - 自分でハッシュ値を計算する場合
 
@@ -118,7 +116,6 @@ This is equal to below lua1/ sample.
 ### Redisサーバ側での準備
 
 1.  以下のファイルをRedisサーバにアクセスできる場所へコピーします
-
     *   src/main/lua/hll_add.lua
     *   src/main/lua/hll_count.lua
 
